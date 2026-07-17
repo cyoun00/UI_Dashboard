@@ -39,24 +39,25 @@ export function prepRadarData(rows) {
         const store = row.store_location;
         const category = row.product_category;
 
-        if (!data[store]) {
-            data[store] = {
-                "name": store,
-                "Tea": 0,
-                "Coffee": 0,
-                "Drinkable Chocolate": 0
+        if (!data[category]) {
+            data[category] = {
+                "name": category,
+                "Hell's Kitchen": 0,
+                "Lower Manhattan": 0,
+                "Astoria": 0
             };
         }
 
-        data[store][category]++;
+        data[category][store]++;
     }
 
     return Object.values(data);
 }
 
-function prepSunburstData(rows) {
+export function prepSunburstData(rows) {
     const root = {
         name: "All Products",
+        value: 0,
         children: []
     };
 
@@ -70,7 +71,7 @@ function prepSunburstData(rows) {
         if (!data[category]) {
             data[category] = {
             name: category,
-            children: [],
+            value: 0,
             types: {} 
             };
         }
@@ -78,7 +79,7 @@ function prepSunburstData(rows) {
         if (!data[category].types[type]) {
             data[category].types[type] = {
             name: type,
-            children: [],
+            value: 0,
             products: {}
             };
         }
@@ -90,24 +91,24 @@ function prepSunburstData(rows) {
             };
         }
 
-        data[category].types[type].products[product].value++;
+        data[category].types[type].products[product].value += 1;
+        data[category].types[type].value += 1;
+        data[category].value += 1;
+        root.value += 1;
     }
 
-    for (const category of Object.values(categories)) {
-        const categoryNode = {
-            name: category.name,
-            children: []
-        };
+    for (const category of Object.values(data)) {
+        category.children = Object.values(category.types);
 
-        for (const type of Object.values(category.types)) {
-            categoryNode.children.push({
-            name: type.name,
-            children: Object.values(type.products)
-            });
+        for (const type of category.children) {
+            type.children = Object.values(type.products);
+            delete type.products;
         }
 
-        root.children.push(categoryNode);
+        delete category.types;
+
+        root.children.push(category);
     }
 
-    return [root];
+    return root;
 }
