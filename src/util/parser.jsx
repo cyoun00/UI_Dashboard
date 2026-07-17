@@ -8,9 +8,9 @@ export function useCsvData(url) {
 
   useEffect(() => {
     Papa.parse(url, {
-      download: true,        // fetch the file from the URL
-      header: true,          // first row becomes object keys
-      dynamicTyping: true,   // "123" becomes 123
+      download: true,        
+      header: true,          
+      dynamicTyping: true,   
       skipEmptyLines: true,
       complete: (results) => {
         setRows(results.data)
