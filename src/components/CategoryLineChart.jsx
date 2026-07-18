@@ -1,4 +1,4 @@
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Brush } from 'recharts';
 import { RechartsDevtools } from '@recharts/devtools';
 
 //React Example
@@ -28,7 +28,6 @@ export default function CategoryLineChart({data}) {
           borderColor: '#FFFFFF',
         }}
       />
-      <Legend />
       <Line
         type="monotone"
         dataKey="Tea"
@@ -56,6 +55,22 @@ export default function CategoryLineChart({data}) {
         }}
         activeDot={{ stroke: '#ca8298' }}
       />
+
+      <Brush
+          dataKey="date"
+          height={30}
+          stroke="#6366f1"
+          fill="#eef2ff"
+          travellerWidth={12}
+          tickFormatter={(value) =>
+            new Date(value).toLocaleDateString("en-US", {
+              month: "short",
+              day: "2-digit",
+              year: "numeric",
+            })
+          }
+        />
+        <Legend />
       <RechartsDevtools />
     </LineChart>
   );

@@ -54,6 +54,31 @@ export function prepRadarData(rows) {
     return Object.values(data);
 }
 
+const categoryColors = {
+  "Coffee": "#6F4E37",
+  "Tea": "#2E8B57",
+  "Drinking Chocolate": "#8B4513"
+};
+
+function lightenColor(hex, percent) {
+  const num = parseInt(hex.slice(1), 16);
+
+  let r = (num >> 16) & 255;
+  let g = (num >> 8) & 255;
+  let b = num & 255;
+
+  r = Math.round(r + (255 - r) * percent);
+  g = Math.round(g + (255 - g) * percent);
+  b = Math.round(b + (255 - b) * percent);
+
+  return (
+    "#" +
+    ((1 << 24) | (r << 16) | (g << 8) | b)
+      .toString(16)
+      .slice(1)
+  );
+}
+
 export function prepSunburstData(rows) {
     const root = {
         name: "All Products",
@@ -72,6 +97,7 @@ export function prepSunburstData(rows) {
             data[category] = {
             name: category,
             value: 0,
+            fill: categoryColors[category],
             types: {} 
             };
         }
@@ -80,6 +106,7 @@ export function prepSunburstData(rows) {
             data[category].types[type] = {
             name: type,
             value: 0,
+            fill: lightenColor(categoryColors[category], 0.25),
             products: {}
             };
         }
@@ -87,7 +114,8 @@ export function prepSunburstData(rows) {
         if (!data[category].types[type].products[product]) {
             data[category].types[type].products[product] = {
             name: product,
-            value: 0
+            value: 0,
+            fill: lightenColor(categoryColors[category], 0.5)
             };
         }
 

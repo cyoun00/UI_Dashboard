@@ -11,6 +11,7 @@ import { prepBarData, prepLineData, prepRadarData, prepSunburstData } from './ut
 
 function App() {
   const { rows, loading, error } = useCsvData('/CafeSalesReduced.csv');
+  const [sortBar , setSortBar] = useState("none");
 
   if (loading) {
     return (
@@ -33,6 +34,12 @@ function App() {
   const sunData = prepSunburstData(rows);
   const radarData = prepRadarData(rows);
 
+  if (sortBar === "asc") {
+    barData.sort((a, b) => a.revenue - b.revenue);
+  } else if (sortBar === "desc") {
+    barData.sort((a, b) => b.revenue - a.revenue);
+  }
+
   return (
     <>
       <LangNavbar />
@@ -41,9 +48,9 @@ function App() {
         <Row className="mb-4">
             <Card className="shadow-sm">
               <Card.Body>
-                <Card.Title>Ordered Categories Over Time </Card.Title>
+                <Card.Title>Sales Per Category Over Time</Card.Title>
                 <LineChart data={lineData} />
-                  
+                <Card.Text>Drag to adjust time range</Card.Text>
               </Card.Body>
             </Card>
         </Row>
@@ -51,7 +58,15 @@ function App() {
         <Row className="g-3 mb-4">
             <Card className="shadow-sm h-100">
               <Card.Body>
-                <Card.Title>Revenue of each Type over a Month</Card.Title>
+                <Card.Title>Revenue By Type</Card.Title>
+                <select
+                  value={sortBar}
+                  onChange={(e) => setSortBar(e.target.value)}
+                >
+                  <option value="none">Original Order</option>
+                  <option value="asc">Lowest → Highest</option>
+                  <option value="desc">Highest → Lowest</option>
+                </select>
                 <BarChart
                   data={barData}
                 />
@@ -62,7 +77,7 @@ function App() {
           <Col>
             <Card className="shadow-sm h-100">
               <Card.Body>
-                <Card.Title>Drink Details of Sales this Month</Card.Title>
+                <Card.Title>Sales By Menu Item</Card.Title>
                 <SunburstChart data={sunData} />
               </Card.Body>
             </Card>
