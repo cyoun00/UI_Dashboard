@@ -6,11 +6,12 @@ import LineChart from './components/CategoryLineChart'
 import BarChart from './components/RevenueBarChart'
 import SunburstChart from './components/VarietySunburstChart'
 import { useCsvData } from './util/parser'
-import { prepBarData, prepLineData, prepRadarData, prepSunburstData } from './util/transform'
-//import { useTranslation } from 'react-i18next'
+import { prepBarData, prepLineData, prepOrderData, prepRadarData, prepRevenueData, prepSunburstData } from './util/transform'
+import { useTranslation } from 'react-i18next'
 
 function App() {
-  const { rows, loading, error } = useCsvData('/CafeSalesReduced.csv');
+  const { t } = useTranslation()
+  const { rows, loading, error } = useCsvData('/CafeSalesReducedNew.csv');
   const [sortBar , setSortBar] = useState("none");
 
   if (loading) {
@@ -33,6 +34,8 @@ function App() {
   const barData = prepBarData(rows);
   const sunData = prepSunburstData(rows);
   const radarData = prepRadarData(rows);
+  const orderData = prepOrderData(rows);
+  const revenueData = prepRevenueData(rows);
 
   if (sortBar === "asc") {
     barData.sort((a, b) => a.revenue - b.revenue);
@@ -42,55 +45,57 @@ function App() {
 
   return (
     <>
-      <LangNavbar />
-      <Container>
-
-        <Row className="mb-4">
-            <Card className="shadow-sm">
+    <LangNavbar className = "navbar"/>
+      <Container className = "dashboard"> 
+            <Card className="chart-card line-chart">
               <Card.Body>
-                <Card.Title>Sales Per Category Over Time</Card.Title>
+                <Card.Title className='cardTitle'>{t("lineTitle")}</Card.Title>
                 <LineChart data={lineData} />
-                <Card.Text>Drag to adjust time range</Card.Text>
+                <Card.Text className='slider'>{t("lineSlider")}</Card.Text>
               </Card.Body>
             </Card>
-        </Row>
-
-        <Row className="g-3 mb-4">
-            <Card className="shadow-sm h-100">
+            <Card className="chart-card bar-chart">
               <Card.Body>
-                <Card.Title>Revenue By Type</Card.Title>
+                <Card.Title className='cardTitle'>{t("barTitle")}</Card.Title>
                 <select
                   value={sortBar}
                   onChange={(e) => setSortBar(e.target.value)}
                 >
-                  <option value="none">Original Order</option>
-                  <option value="asc">Lowest → Highest</option>
-                  <option value="desc">Highest → Lowest</option>
+                  <option value="none">{t("barDropdown1")}</option>
+                  <option value="asc">{t("barDropdown2")}</option>
+                  <option value="desc">{t("barDropdown3")}</option>
                 </select>
                 <BarChart
                   data={barData}
                 />
               </Card.Body>
             </Card>
-        </Row>
-        <Row>
-          <Col>
-            <Card className="shadow-sm h-100">
+            <div className='cards'>
+              <Card className="chart-card">
+                <Card.Body>
+                  <Card.Title className='card-format card-stat'>{t("orderCard")}</Card.Title>
+                  <Card.Text className='card-format'>{orderData}</Card.Text>
+                </Card.Body>
+              </Card>
+              <Card className="chart-card">
+                <Card.Body>
+                  <Card.Title className='card-format card-stat'>{t("revenueCard")}</Card.Title>
+                  <Card.Text className='card-format'>{revenueData}</Card.Text>
+                </Card.Body>
+              </Card>
+            </div>
+            <Card className="chart-card sun-chart">
               <Card.Body>
-                <Card.Title>Sales By Menu Item</Card.Title>
+                <Card.Title className='cardTitle'>{t("sunTitle")}</Card.Title>
                 <SunburstChart data={sunData} />
               </Card.Body>
             </Card>
-          </Col>
-           <Col>
-            <Card className="shadow-sm h-100">
+            <Card className="chart-card radar-chart">
               <Card.Body>
-                <Card.Title>Sales by Store</Card.Title>
+                <Card.Title className='cardTitle'>{t("radarTitle")}</Card.Title>
                 <RadarChart data={radarData} />
               </Card.Body>
             </Card>
-          </Col>
-        </Row>
       </Container>
     </>
   );

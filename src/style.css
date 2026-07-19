@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit&display=swap');
+body{
+    font-family: "Outfit";
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 485px 600px 520px;
+    grid-template-areas:
+        "bar bar bar cards"
+        "sun sun radar radar"
+        "line line line line";
+    gap: 24px;
+    padding: 24px;
+    background: #f5f7fa;
+    min-height: 100vh;
+}
+
+.chart-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+}
+
+.btn{
+    background-color: white;
+    border-color: #ca8298;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 50vh;
+    margin: 8px;
+}
+
+.navbar {
+    background: #82ca9d;
+    padding: 1em;
+    display: flex;
+    margin: 0;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.cards{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 24px;
+    background: #f5f7fa;
+}
+
+.navbar-brand{
+    display: flex;
+    align-items: center;
+    font-size: x-large;
+}
+
+.card-format{
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.cardTitle{
+    font-size: large;
+}
+
+.card-text{
+    font-size: 5rem;
+    color: #ca8298;
+}
+
+.card-stat{
+    font-size: xx-large;
+}
+
+.slider{
+    color: rgb(46, 139, 87);
+    display: flex;
+    justify-content: center;
+    font-size: large;
+}
+
+
+.inline {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.buttonGroup{
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+}
+
+.line-chart {
+    grid-area: line;
+}
+
+.bar-chart {
+    grid-area: bar;
+}
+
+.radar-chart {
+    grid-area: radar;
+}
+
+.sun-chart {
+    grid-area: sun;
+}
+
+@media (max-width: 900px) {
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+}

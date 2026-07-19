@@ -10,18 +10,18 @@ function LanguageNavbar() {
   }
 
   return (
-    <Navbar bg="dark" data-bs-theme="dark" className="mb-4">
-      <Container>
+    <Navbar expand="lg" fixed="top" className="navbar">
+      <Container className = "inline">
         <Navbar.Brand>{t('appTitle')}</Navbar.Brand>
-        <ButtonGroup>
-          <Button
+        <ButtonGroup className='buttonGroup'>
+          <Button className='btn'
             variant={i18n.language === 'en' ? 'light' : 'outline-light'}
             size="sm"
             onClick={() => switchTo('en')}
           >
             EN
           </Button>
-          <Button
+          <Button className='btn'
             variant={i18n.language === 'fr' ? 'light' : 'outline-light'}
             size="sm"
             onClick={() => switchTo('fr')}

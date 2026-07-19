@@ -1,12 +1,14 @@
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Brush } from 'recharts';
 import { RechartsDevtools } from '@recharts/devtools';
+import { useTranslation } from 'react-i18next';
 
 //React Example
 
 export default function CategoryLineChart({data}) {
+  const {t} = useTranslation();
   return (
     <LineChart
-      style={{ width: '100%', maxWidth: '700px', height: '100%', maxHeight: '70vh', aspectRatio: 1.618 }}
+      style={{ width: '100%', maxWidth: '100%', height: '100%', maxHeight: '45vh', aspectRatio: 1.618 }}
       responsive
       data={data}
       margin={{
@@ -31,6 +33,7 @@ export default function CategoryLineChart({data}) {
       <Line
         type="monotone"
         dataKey="Tea"
+        name = {t("tea")}
         stroke="#8884d8"
         dot={{
           fill: '#FFFFFF',
@@ -40,6 +43,7 @@ export default function CategoryLineChart({data}) {
       <Line
         type="monotone"
         dataKey="Coffee"
+        name = {t("coffee")}
         stroke="#82ca9d"
         dot={{
           fill: '#FFFFFF',
@@ -49,6 +53,7 @@ export default function CategoryLineChart({data}) {
       <Line
         type="monotone"
         dataKey="Drinking Chocolate"
+        name = {t("drinkingChocolate")}
         stroke="#ca8298"
         dot={{
           fill: '#FFFFFF',
@@ -59,12 +64,12 @@ export default function CategoryLineChart({data}) {
       <Brush
           dataKey="date"
           height={30}
-          stroke="#6366f1"
+          stroke="rgb(46, 139, 87)"
           fill="#eef2ff"
           travellerWidth={12}
           tickFormatter={(value) =>
             new Date(value).toLocaleDateString("en-US", {
-              month: "short",
+              month: "numeric",
               day: "2-digit",
               year: "numeric",
             })

@@ -55,9 +55,9 @@ export function prepRadarData(rows) {
 }
 
 const categoryColors = {
-  "Coffee": "#6F4E37",
-  "Tea": "#2E8B57",
-  "Drinking Chocolate": "#8B4513"
+  "Coffee": "#8884d8",
+  "Tea": "#82ca9d",
+  "Drinking Chocolate": "#ca8298"
 };
 
 function lightenColor(hex, percent) {
@@ -139,4 +139,28 @@ export function prepSunburstData(rows) {
     }
 
     return root;
+}
+
+export function prepOrderData(rows) {
+    let data = 0;
+
+    for (const row of rows) {
+        data++;
+    }
+
+    return data;
+}
+
+export function prepRevenueData(rows) {
+    let data = 0;
+
+    for (const row of rows) {
+        const price = row.unit_price;
+
+        data = data + price;
+    }
+
+    data = data.toFixed(2);
+
+    return data;
 }
