@@ -57,6 +57,8 @@ function App() {
             <Card className="chart-card bar-chart">
               <Card.Body>
                 <Card.Title className='cardTitle'>{t("barTitle")}</Card.Title>
+                <div className='dropdown-inline'>
+                <Card.Text className='dropdown-text'>{t("dropdownLabel")}</Card.Text>
                 <select
                   value={sortBar}
                   onChange={(e) => setSortBar(e.target.value)}
@@ -65,6 +67,7 @@ function App() {
                   <option value="asc">{t("barDropdown2")}</option>
                   <option value="desc">{t("barDropdown3")}</option>
                 </select>
+                </div>
                 <BarChart
                   data={barData}
                 />
@@ -80,7 +83,7 @@ function App() {
               <Card className="chart-card">
                 <Card.Body>
                   <Card.Title className='card-format card-stat'>{t("revenueCard")}</Card.Title>
-                  <Card.Text className='card-format'>{revenueData}</Card.Text>
+                  <Card.Text className='card-format'>${revenueData}</Card.Text>
                 </Card.Body>
               </Card>
             </div>
@@ -93,6 +96,7 @@ function App() {
             <Card className="chart-card radar-chart">
               <Card.Body>
                 <Card.Title className='cardTitle'>{t("radarTitle")}</Card.Title>
+                <Card.Text className='radar-text'>{t("radarLabel")}</Card.Text>
                 <RadarChart data={radarData} />
               </Card.Body>
             </Card>

@@ -18,6 +18,8 @@ const resources = {
             barDropdown1: "Unsorted",
             barDropdown2: "Lowest → Highest",
             barDropdown3: "Highest → Lowest",
+            dropdownLabel: "Click dropdown to sort: ",
+            radarLabel: "Click the legend to see one store",
             orderCard: "Total Orders",
             revenueCard: "Total Revenue"
         }
@@ -38,6 +40,8 @@ const resources = {
             barDropdown1: "Non trié",
             barDropdown2: "Plus bas → Plus élevé",
             barDropdown3: "Plus élevé → Plus bas",
+            dropdownLabel: "Cliquez sur la liste déroulante pour trier: ",
+            radarLabel: "Cliquez sur la légende pour voir un magasin",
             orderCard: "Total des commandes",
             revenueCard: "Chiffre d'affaires total"
         }

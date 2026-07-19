@@ -14,12 +14,19 @@ export default function CategoryLineChart({data}) {
       margin={{
         top: 5,
         right: 0,
-        left: 0,
+        left: 5,
         bottom: 5,
       }}
     >
       <CartesianGrid strokeDasharray="3 3" stroke="#000000" />
-      <XAxis dataKey="date" stroke="#000000" />
+      <XAxis dataKey="date" stroke="#000000" tickFormatter={(value) =>
+            new Date(value).toLocaleDateString("en-CA", {
+              year: "numeric",
+              month: "numeric",
+              day: "2-digit",
+              
+            })
+          }/>
       <YAxis width="auto" stroke="#000000" />
       <Tooltip
         cursor={{
@@ -29,6 +36,14 @@ export default function CategoryLineChart({data}) {
           backgroundColor: '#FFFFFF',
           borderColor: '#FFFFFF',
         }}
+        labelFormatter={(label) =>
+            new Date(label).toLocaleDateString("en-CA", {
+              year: "numeric",
+              month: "numeric",
+              day: "2-digit",
+              
+            })
+          }
       />
       <Line
         type="monotone"
@@ -68,14 +83,15 @@ export default function CategoryLineChart({data}) {
           fill="#eef2ff"
           travellerWidth={12}
           tickFormatter={(value) =>
-            new Date(value).toLocaleDateString("en-US", {
+            new Date(value).toLocaleDateString("en-CA", {
+              year: "numeric",
               month: "numeric",
               day: "2-digit",
-              year: "numeric",
+              
             })
           }
         />
-        <Legend />
+        <Legend verticalAlign='top'/>
       <RechartsDevtools />
     </LineChart>
   );

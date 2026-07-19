@@ -23,12 +23,12 @@ export default function RevenueBarChart({data}) {
       margin={{
         top: 5,
         right: 0,
-        left: 0,
+        left: 10,
         bottom: 70,
       }}
     >
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="type" angle={-30} textAnchor="end" interval={0} />
+      <XAxis dataKey="type" angle={-20} textAnchor="end" interval={0} />
       <YAxis width="auto" />
       <Tooltip formatter={(value) => [`$${value.toFixed(2)}`, "Revenue"]}/>
       <Legend verticalAlign="top" align="right"/>

@@ -67,7 +67,7 @@ body{
 }
 
 .cardTitle{
-    font-size: large;
+    font-size: x-large;
 }
 
 .card-text{
@@ -84,8 +84,36 @@ body{
     display: flex;
     justify-content: center;
     font-size: large;
+    margin-top: 10px;
 }
 
+.select{
+    height: 50%;
+}
+
+.radar-text{
+    font-size: medium;
+    font-weight: bold;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    color: black;
+    text-decoration: overline;
+}
+
+.dropdown-text{
+    font-size: medium;
+    color: #8884d8;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.dropdown-inline {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+}
 
 .inline {
     display: flex;
